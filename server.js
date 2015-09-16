@@ -14,7 +14,7 @@ var port = process.env.PORT || 8080; // set the port for our app
 //mongoose.connect('mongodb://node:noder@novus.modulusmongo.net:27017/Iganiq8o');
 
 //connect to our database (hosted on localhost)
- mongoose.connect('mongodb://localhost:27017/myDatabase');
+ mongoose.connect('mongodb://localhost:27017/crm');
 
 //APP CONFIGURATION ------------
 // use body parser so we can grab information from POST requests
