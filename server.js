@@ -9,6 +9,13 @@ var morgan = require('morgan'); // used to see requests
 var mongoose = require('mongoose'); // for working w/ our database
 var port = process.env.PORT || 8080; // set the port for our app
 
+
+// modulus
+//mongoose.connect('mongodb://node:noder@novus.modulusmongo.net:27017/Iganiq8o');
+
+//connect to our database (hosted on localhost)
+ mongoose.connect('mongodb://localhost:27017/myDatabase');
+
 //APP CONFIGURATION ------------
 // use body parser so we can grab information from POST requests
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -28,7 +35,7 @@ app.use(morgan('dev'));
 // ROUTES FOR OUR API
 // ==================
 
-// basic route for the home page 
+// basic route for the home page
 app.get('/', function(req, res){
 	res.send('Welcome to the home page!');
 });
