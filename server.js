@@ -13,7 +13,6 @@ var port = process.env.PORT || 8080; // set the port for our app
 
 // modulus
 //mongoose.connect('mongodb://node:noder@novus.modulusmongo.net:27017/Iganiq8o');
-
 //connect to our database (hosted on localhost)
  mongoose.connect('mongodb://localhost:27017/crm');
 
@@ -27,8 +26,8 @@ app.use(function(req, res, next){
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Origin', 'GET,POST');
 	res.setHeader('Access-Control-Allow-Origin', 'X-Requested-With, content-type, \ Authorization');
-		next();
-	});
+	next();
+});
 
 // log all requests to the console
 app.use(morgan('dev'));
@@ -43,13 +42,8 @@ app.get('/', function(req, res){
 
 //get an instance of the express router
 var apiRouter = express.Router();
-
 //middleware to use for all requests
 // more routes for our API will happen here
-
-
-
-//middleware to use for all requests
 apiRouter.use(function(req, res, next){
 	//do logging
 	console.log('somebody just came to our app');
@@ -58,6 +52,7 @@ apiRouter.use(function(req, res, next){
 
 	next(); //make sure we go to the next routes and don't stop here
 });
+
 //test route to make sure everything is working
 // accessed at GET http://localhost:8080/api
 apiRouter.get('/', function(req, res){
@@ -68,6 +63,7 @@ apiRouter.get('/', function(req, res){
 // REGISTER OUR ROUTES -----------
 // all of our routes will be prefixed with /api
 app.use('/api', apiRouter);
+
 //START THE SERVER
 // ===============
 
