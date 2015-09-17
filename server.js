@@ -44,6 +44,20 @@ app.get('/', function(req, res){
 //get an instance of the express router
 var apiRouter = express.Router();
 
+//middleware to use for all requests
+// more routes for our API will happen here
+
+
+
+//middleware to use for all requests
+apiRouter.use(function(req, res, next){
+	//do logging
+	console.log('somebody just came to our app');
+	//we'll add more to the middle ware later
+	//this is where we will authenticate users
+
+	next(); //make sure we go to the next routes and don't stop here
+});
 //test route to make sure everything is working
 // accessed at GET http://localhost:8080/api
 apiRouter.get('/', function(req, res){
@@ -51,12 +65,9 @@ apiRouter.get('/', function(req, res){
 
 });
 
-// more routes for our API will happen here
-
 // REGISTER OUR ROUTES -----------
 // all of our routes will be prefixed with /api
 app.use('/api', apiRouter);
-
 //START THE SERVER
 // ===============
 
