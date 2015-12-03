@@ -14,7 +14,7 @@ var port = process.env.PORT || 8080; // set the port for our app
 // modulus
 //mongoose.connect('mongodb://node:noder@novus.modulusmongo.net:27017/Iganiq8o');
 //connect to our database (hosted on localhost)
- mongoose.connect('mongodb://localhost:27017/crm');
+ mongoose.connect('mongodb://127.0.0.1:27017/crm');
 
 //APP CONFIGURATION ------------
 // use body parser so we can grab information from POST requests
@@ -98,4 +98,3 @@ app.use('/api', apiRouter);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
-
