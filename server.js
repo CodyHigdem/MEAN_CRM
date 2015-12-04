@@ -1,8 +1,9 @@
 //BASE SETUP
 // ============
 
-//CALL THE PACKAGES -------
+//INCLUDE FILES
 var User = require('./app/models/user');
+//CALL THE PACKAGES -------
 var express = require('express'); // call express
 var app = express(); // define our app using express
 var bodyParser = require('body-parser'); // get body-parser
@@ -14,7 +15,7 @@ var port = process.env.PORT || 8080; // set the port for our app
 // modulus
 //mongoose.connect('mongodb://node:noder@novus.modulusmongo.net:27017/Iganiq8o');
 //connect to our database (hosted on localhost)
- mongoose.connect('mongodb://127.0.0.1:27017/crm');
+ mongoose.connect('mongodb://localhost:27017/crm');
 
 //APP CONFIGURATION ------------
 // use body parser so we can grab information from POST requests
@@ -58,6 +59,7 @@ apiRouter.route('/users')
 		user.password = req.body.password;
 
 		//save the user and check for errors
+    user.save(function(err){
 		if(err){
 			//duplicate entry
 			if (err.code == 11000)
@@ -66,7 +68,7 @@ apiRouter.route('/users')
 				return res.send(err);
 		}
 			res.json({message: "User Created!"});
-
+    });
 
 	})
 
@@ -95,6 +97,5 @@ app.use('/api', apiRouter);
 
 //START THE SERVER
 // ===============
-
 app.listen(port);
 console.log('Magic happens on port ' + port);
