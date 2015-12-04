@@ -80,6 +80,20 @@ apiRouter.route('/users')
       res.json(users);
     });
   });
+
+  // on routes that end in /users/:user-id
+  //----------------------------------------
+  apiRouter.route('/users/:user_id')
+    // get the user with this id
+    // (accessed at GET http://localhost:8080/api/users/:user_id)
+    .get(function(req, res){
+      User.findById(req.params.user_id, function(err,user){
+        if (err) res.send(err);
+
+        //return that user
+        res.json(user);
+      });
+    })
 //middleware to use for all requests
 // more routes for our API will happen here
 apiRouter.use(function(req, res, next){
