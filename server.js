@@ -150,7 +150,34 @@ apiRouter.use(function(req, res, next){
 	//we'll add more to the middle ware later
 	//this is where we will authenticate users
 
-	next(); //make sure we go to the next routes and don't stop here
+  //check header or url params or post params for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  //decode the token
+  if( token ) {
+
+      //verifies secrete and checks xp
+      jwt.verify(token, superSecret, function(err, decoded){
+        if(err){
+          return res.status(403).send({
+            success: false,
+            message: 'Failed to authenticate token.'
+          });
+        } else {
+          // if everything is good, save to request for use in other routes
+          req.decoded = decoded;
+          next();
+        }
+      });
+  } else {
+    // if there is no token
+    // return an HTTP response of 403
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided'
+    });
+  }
+	//next(); //make sure we go to the next routes and don't stop here
 });
 
 //test route to make sure everything is working
