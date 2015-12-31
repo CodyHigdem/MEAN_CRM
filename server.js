@@ -187,6 +187,14 @@ apiRouter.get('/', function(req, res){
 
 });
 
+//api endpoint to get user info
+apiRouter.get('/me', function(req, res){
+  res.send(req.decoded);
+});
+
+//replace this stuff with PassportJS
+//express jwt
+
 // REGISTER OUR ROUTES -----------
 // all of our routes will be prefixed with /api
 app.use('/api', apiRouter);
